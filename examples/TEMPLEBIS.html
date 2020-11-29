@@ -89,7 +89,7 @@
 			function init() {
 
 				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xcccccc );
+				scene.background = new THREE.TextureLoader().load( 'textures/sunset.jpg' );
 				//---
 								renderer = new THREE.WebGLRenderer( { antialias: true } );
 								renderer.setPixelRatio( window.devicePixelRatio );
@@ -544,7 +544,7 @@
 				scene.add( pilier40 );
 				scene.add( pilier41 );
 
-	
+
 				window.addEventListener( 'resize', onWindowResize, false );
 
 			}
