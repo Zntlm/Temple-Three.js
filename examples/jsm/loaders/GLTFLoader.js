@@ -61,7 +61,7 @@ import {
 	Vector3,
 	VectorKeyframeTrack,
 	sRGBEncoding
-} from '../../../build/three.module.js';
+} from "../../../build/three.module.js";
 
 var GLTFLoader = ( function () {
 
@@ -525,7 +525,7 @@ var GLTFLoader = ( function () {
 				break;
 
 			default:
-				throw new Error( 'THREE.GLTFLoader: Unexpected light type: ' + lightDef.type );
+				throw new Error( 'THREE.GLTFLoader: Unexpected light type, "' + lightDef.type + '".' );
 
 		}
 
@@ -2911,13 +2911,11 @@ var GLTFLoader = ( function () {
 	/** When Object3D instances are targeted by animation, they need unique names. */
 	GLTFParser.prototype.createUniqueName = function ( originalName ) {
 
-		var sanitizedName = PropertyBinding.sanitizeNodeName( originalName || '' );
-
-		var name = sanitizedName;
+		var name = PropertyBinding.sanitizeNodeName( originalName || '' );
 
 		for ( var i = 1; this.nodeNamesUsed[ name ]; ++ i ) {
 
-			name = sanitizedName + '_' + i;
+			name = originalName + '_' + i;
 
 		}
 
@@ -3258,7 +3256,6 @@ var GLTFLoader = ( function () {
 
 		var parser = this;
 		var json = this.json;
-		var extensions = this.extensions;
 
 		var meshDef = json.meshes[ meshIndex ];
 		var primitives = meshDef.primitives;
@@ -3354,8 +3351,6 @@ var GLTFLoader = ( function () {
 				mesh.name = parser.createUniqueName( meshDef.name || ( 'mesh_' + meshIndex ) );
 
 				assignExtrasToUserData( mesh, meshDef );
-
-				if ( primitive.extensions ) addUnknownExtensionsToUserData( extensions, mesh, primitive );
 
 				parser.assignFinalMaterial( mesh );
 
